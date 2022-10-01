@@ -1,0 +1,190 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+:root{
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .7);
+}
+body{
+    margin: 0;
+    background-color: #ffe4e6;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+    width: calc(100vw - 15px);
+}
+
+.input-text{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    font-weight: bold;
+    padding: 5px;
+    color: #db2777;
+    border: none;
+    cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style:oblique;
+}
+.board{
+    height: 50vh;
+    width: 100vw;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    margin-bottom: 0;
+    pointer-events: none;
+}
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid #f472b6;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    grid-template-rows: 1fr .3fr;
+    font-size: 50px;
+    color: #db2777;
+    
+}
+.game-board-button{
+    background-color: #fff;
+    grid-row: 2 / 3;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9){
+    border-bottom: none;
+}
+
+.cell:nth-child(3n + 1){
+    border-left: none;
+}
+.cell:nth-child(3n + 3){
+    border-right: none;
+}
+
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
+}
+.cell.x::before,
+.cell.x::after{
+    background-color: #db2777;
+}
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    background-color: #fb7185;
+    color: #fb7185;
+}
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content: 'X';
+    position: absolute;
+    width: calc(var(--mark-size) * .0.15);
+    height: var(--mark-size);
+    color: #db2777;
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after{
+    content: '';
+    position: absolute;
+    border-radius: 50%;    
+}
+.cell.circle::before{
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: #db2777;
+}
+.cell.cell.circle::after{
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
+    background: #fff;
+}
+.game-board-button{
+  background-color: #f9a8d4;
+  border: none;
+  color: #f9a8d4;
+  height: 9vh;
+  width: calc(var(--cell-size) - 15px);
+  opacity: .05;
+  cursor: pointer;
+}
+
+#start{
+    font-size: 1.5rem;
+    width: calc(25vw - 10px);
+    margin-left: 20px;
+    background-color: #f472b6;
+    border-radius: 15px;
+    border:none;
+    color: #fff;
+   cursor: pointer;
+}
+.winnerMessage{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(7px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #db2777;
+    font-size: 5rem;
+    z-index: 1;
+}
+
+.winnerMessage button{
+    font-size: 2rem;
+    background-color: #db2777;
+    border: 1px solid #fff;
+    padding: .50em, .5em;
+    cursor: pointer;
+    color: #fff;
+}
+.winnerMessage button:hover{
+    background-color: #db2777;
+    color: white;
+    border-color: white;
+    transform: scale3d(1);
+    font-size: 3rem;
+}
+.winnerMessage.show{
+    display: flex;
+}
+.footer-tic{
+    margin-top: 200px;
+}
